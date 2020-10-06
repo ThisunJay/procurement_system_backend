@@ -49,7 +49,7 @@ exports.signin = async (req, res) => {
                 message: 'Password is incorrect',
             });
         } else {
-            const token = jwt.sign({ username: user_details.username, email: user_details.email, role: user_details.role }, process.env.JWT_SCREAT, { expiresIn: '240h' });
+            const token = jwt.sign({ username: user_details.username, email: user_details.email, role: user_details.role }, "abcdefghijklmnopqrstuvwxyz", { expiresIn: '240h' });
             return res.status(200).send({
                 data: { "token": token, "role": user_details.role },
                 success: true,
