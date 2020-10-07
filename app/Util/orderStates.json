@@ -1,0 +1,6 @@
+{
+    "pending": 1,
+    "approved": 2,
+    "placed": 3,
+    "declined": 0
+}
