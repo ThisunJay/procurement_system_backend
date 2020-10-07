@@ -135,6 +135,12 @@ exports.update_state = async (req, res) => {
             });
         }
 
+        //please send state as an object not an object array
+        //like this
+        // {
+        //     "state": 2,
+        //     "comment": "Order Approved"
+        // }
         if(state) {
             order.state = [...order.state, state];
         }
@@ -177,7 +183,7 @@ exports.update_order = async (req, res) => {
         }
 
         if(items) order.items = items
-        if(total) order.items = total
+        if(total) order.total = total
 
         order.save().then(data => {
             return res.status(200).send({
