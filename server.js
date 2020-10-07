@@ -19,9 +19,11 @@ app.get('/', (req, res) => res.send('Case study API up and running!'));
 
 //import routes
 const userRoute = require('./app/Routes/user.route');
+const supplierRoute = require('./app/Routes/supplier.route');
 
 //define routes
 app.use('/api/users', userRoute);
+app.use('/api/suppliers', supplierRoute);
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => console.log(`Server up and running on port ${PORT}`));

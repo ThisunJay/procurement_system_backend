@@ -58,3 +58,45 @@ exports.signin = async (req, res) => {
         }
     }
 }
+
+exports.resetPwd = async (req, res) => {
+    const {email, oldPassword, newPassword} = req.body;
+
+    let getUser = await User.findOne({email: email});
+
+    if(getUser == null) {
+        return res.status(404).send({
+            data: null,
+            success: false,
+            message: err.message || "User not found!"
+        });
+    }
+    
+    if(bcrypt.compare(oldPassword, getUser.password)){
+        
+        let enPwd = await bcrypt.hash(newPassword, 10);
+
+        getUser.password = enPwd;
+
+        getUser.save().then(data => {
+            return res.status(200).send({
+                data: data,
+                success: true,
+                message: 'Successfully Updated the Password!'
+            });
+        }).catch(err => {
+            res.status(500).send({
+                data: null,
+                success: false,
+                message: err.message || "Some error occurred while updating the password."
+            });
+        })
+    }
+    else{
+        res.status(401).send({
+            data: null,
+            success: false,
+            message: "old password and new password does not match"
+        });
+    }
+}

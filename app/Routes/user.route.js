@@ -9,4 +9,8 @@ router.post('/signup', users.create);
 //api/user/signin
 router.post('/signin', users.signin);
 
+//reset user password
+//api/user/resetPassword
+router.post('/resetPassword', users.resetPwd);
+
 module.exports = router;
