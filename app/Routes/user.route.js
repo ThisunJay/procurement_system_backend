@@ -13,4 +13,8 @@ router.post('/signin', users.signin);
 //api/user/resetPassword
 router.post('/resetPassword', users.resetPwd);
 
+//get_all_site_managers
+//api/user/sitemanagers
+router.get('/sitemanagers', users.get_all_site_managers);
+
 module.exports = router;
