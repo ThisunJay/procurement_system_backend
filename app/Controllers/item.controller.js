@@ -1,13 +1,13 @@
 const Item = require('../Models/item.model');
 
 exports.create = async (req, res) => {
-    const {name, supplier, price, description} = req.body;
+    const {item_id, item_name, description, price} = req.body;
 
     const newItem = new Item({
-        name,
-        supplier,
+        item_id,
+        item_name,
+        description,
         price,
-        description
     })
 
     newItem.save().then(data => {
@@ -27,13 +27,13 @@ exports.create = async (req, res) => {
 
 exports.get_all = async (req, res) => {
     Item.find({}, (err, data) => {
-        if(err) {
-            return res.status(500).send({
-                data: null,
-                success: false,
-                message: err.message || "Some error occurred while returning data."
-            });
-        }
+        // if(err) {
+        //     return res.status(500).send({
+        //         data: null,
+        //         success: false,
+        //         message: err.message || "Some error occurred while returning data."
+        //     });
+        // }
 
         return res.status(200).send({
             data: data,
