@@ -2,7 +2,7 @@ const express = require('express');
 const connectDB = require('./app/Config/db');
 const cors = require('cors');
 const bodyParser = require("body-parser");
-
+const morgan = require("morgan");
 const app = express();
 
 //Establish database connection
@@ -13,6 +13,7 @@ app.use(cors());
 app.use(express.json({ extended: false }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(morgan("dev"));
 
 //default response
 app.get('/', (req, res) => res.send('Case study API up and running!'));

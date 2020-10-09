@@ -31,9 +31,9 @@ exports.create = async (req, res) => {
 }
 
 exports.signin = async (req, res) => {
-
-    const user_details = await User.findOne({ email: req.body.email});
-
+    console.log(req.body);
+    const user_details = await User.findOne({ email: req.body.username});
+    console.log(user_details);
     if (user_details === null) {
         return res.status(406).send({
             data: null,
@@ -51,7 +51,7 @@ exports.signin = async (req, res) => {
         } else {
             const token = jwt.sign({ username: user_details.username, email: user_details.email, role: user_details.role }, "abcdefghijklmnopqrstuvwxyz", { expiresIn: '240h' });
             return res.status(200).send({
-                data: { "token": token, "role": user_details.role },
+                data: { "token": token, "role": user_details.role, "email": user_details.email },
                 success: true,
                 message: 'Successfully login',
             });
