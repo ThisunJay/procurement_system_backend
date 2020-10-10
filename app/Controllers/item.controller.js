@@ -68,30 +68,26 @@ exports.get_one = async (req, res) => {
 
 exports.delete = async (req, res) => {
     const {id} = req.body;
+    console.log("id eka" , id);
 
-    Item.findOne({_id : id}, (err, data) => {
-        if(err) {
-            return res.status(500).send({
-                data: null,
-                success: false,
-                message: err.message || "Some error occurred while returning data."
-            });
+    Item.findOneAndDelete({ _id: req.params.id })
+    .then( result => {
+
+        if (!result) {
+            throw new Error('No record found')
         }
 
-        data.remove().then(data => {
-            return res.status(200).send({
-                data: data,
-                success: true,
-                message: 'Successfully Deleted!'
-            });
-        }).catch(err => {
-            return res.status(500).send({
-                data: data,
-                success: false,
-                message: err.message || "Some error occurred while returning data."
-            });
-        })
+        res.status(200).send({
+            message: "Deleted successfully"
+        });
+    
     })
+    .catch(err => {
+        res.status(500).send({
+            message:
+                err.message || "Some error occurred while deleting the data."
+        });
+    }); 
 }
 
 exports.update = async (req, res) => {
