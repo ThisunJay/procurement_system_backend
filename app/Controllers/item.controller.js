@@ -1,14 +1,17 @@
 const Item = require('../Models/item.model');
 
 exports.create = async (req, res) => {
-    const {item_id, item_name, description, price} = req.body;
+    const {item_id, item_name, description, price, supplierName} = req.body;
 
     const newItem = new Item({
         item_id,
         item_name,
         description,
         price,
+        supplierName,
     })
+
+    console.log("frontend item data", newItem);
 
     newItem.save().then(data => {
         return res.status(200).send({

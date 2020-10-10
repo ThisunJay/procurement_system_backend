@@ -10,19 +10,21 @@ const Item = new mongoose.Schema({
         type: String,
         required: true,
     },
-    // supplier: {
-    //     type: Schema.Types.ObjectId,
-    //     ref: 'suppliers',
-    //     required: true,
-    // },
-    price: {
-        type: String,
-        required: true,
-    },
     description: {
         type: String,
         required: true,
     },
+    price: {
+        type: String,
+        required: true,
+    },
+    supplierName: {
+        type: Schema.Types.ObjectId,
+        // ref: 'suppliers',
+        required: true,
+    },
+   
+  
 });
 
 module.exports = mongoose.model('items', Item);
