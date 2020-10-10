@@ -7,7 +7,7 @@ const UtilObj = require('../Util/util');
 
 exports.create = async (req, res) => {
     const { name, address, phoneNo, email } = req.body;
-
+ 
     // console.log(userRoles.site_manager);
     // console.log(userRoles.accountant);
     // console.log(userRoles.management);
@@ -65,4 +65,23 @@ exports.create = async (req, res) => {
             message: err.message || "Some error occurred while creating the user."
         });
     });
+}
+
+//get All suppliers
+exports.get = async (req, res) => {
+    Supplier.find({}, (err, data) => {
+        if(err) {
+            return res.status(500).send({
+                data: null,
+                success: false,
+                message: err.message || "Some error occurred while returning data."
+            });
+        }
+
+        return res.status(200).send({
+            data: data,
+            success: true,
+            message: 'Successfully Returned!'
+        });
+    })
 }

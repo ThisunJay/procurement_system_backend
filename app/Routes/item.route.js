@@ -15,7 +15,7 @@ router.get('/get_all', items.get_all);
 
 //create item
 //api/items/delete
-router.delete('/delete', items.delete);
+router.delete('/delete/:id', items.delete);
 
 //create item
 //api/items/update
