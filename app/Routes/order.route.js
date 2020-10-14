@@ -16,4 +16,12 @@ router.patch('/update_state', orders.update_state);
 //update the order items and total
 router.patch('/update_order', orders.update_order);
 
+//get all orders
+//api/orders/get_all
+router.get('/get_all', orders.get_all);
+
+//get one orders
+//api/orders/get_one
+router.get('/get_one', orders.get_one);
+
 module.exports = router;

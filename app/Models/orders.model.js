@@ -29,8 +29,9 @@ const Order = new mongoose.Schema({
         type: [],
         required: true,
     },
-    total: {
+    current_state: {
         type: String,
+        default: 1
     }
 });
 

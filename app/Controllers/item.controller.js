@@ -8,7 +8,6 @@ exports.create = async (req, res) => {
         item_name,
         description,
         price,
-        supplierName,
     })
 
     console.log("frontend item data", newItem);

@@ -31,6 +31,33 @@ class Util {
           console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
     }
 
+  //send email to registered supplier (password)
+  async sendPasswordForNewUser(email, password){
+    let transporter = nodemailer.createTransport({
+        host: 'smtp.gmail.com',
+        port: 587,
+        secure: false, // true for 465, false for other ports
+        auth: {
+          user: 'xunitlabs@gmail.com', // generated ethereal user
+          pass: 'Infor#2020', // generated ethereal password
+        },
+      });
+  
+      //Send email with the message
+      let info = await transporter.sendMail({
+        from: '"Procurement System" <xunitlabs@gmail.com>', // sender address
+        to: email, // list of receivers
+        subject: 'Use this password for login', // Subject line
+        text:
+          'Please Enter Bellow Code as Your account password', // plain text body
+        html: `<h3 style="text-align: center">Please enter this *** ${password} *** as your password, to login to your account</h3>`, // html body
+      });
+  
+      console.log('Message sent: %s', info.messageId);
+      // Preview only available when sending through an Ethereal account
+      console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+}  
+
     //send purchase order email
   async sendPurchaseOrderEmail(supplierEmail, orderItems, orderDate) {
     let transporter = nodemailer.createTransport({

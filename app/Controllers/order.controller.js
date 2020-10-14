@@ -1,7 +1,8 @@
 const Order = require('../Models/orders.model');
+const Supplier = require('../Models/supplier.model');
 
 exports.create = async (req, res) => {
-    const {items, supplier, employee, date, site, state, total} = req.body;
+    const {items, supplier, employee, date, site, state, current_state} = req.body;
 
     //make sure to send items like this
     // [
@@ -34,8 +35,7 @@ exports.create = async (req, res) => {
         employee,
         date,
         site,
-        state,
-        total
+        state
     })
 
     newOrder.save().then(data => {
@@ -143,6 +143,7 @@ exports.update_state = async (req, res) => {
         // }
         if(state) {
             order.state = [...order.state, state];
+            order.current_state = state.state;
         }
 
         order.save().then(data => {
@@ -198,5 +199,56 @@ exports.update_order = async (req, res) => {
                 message: err.message || "Some error occurred while updating."
             })
         })
+    })
+}
+
+exports.get_all = async (req, res) => {
+    Order.find({}, (err, data) => {
+        if(err) {
+            return res.status(500).send({
+                data: null,
+                success: false,
+                message: err.message || "Some error occurred while returning data."
+            });
+        }
+
+        return res.status(200).send({
+            data: data,
+            success: true,
+            message: 'Successfully Returned!'
+        });
+    })
+}
+
+exports.get_one = async (req, res) => {
+    const id = req.body.id;
+
+    Order.findOne({_id: id}, async (err, order) => {
+        if(err) {
+            return res.status(500).send({
+                data: null,
+                success: false,
+                message: err.message || "Some error occurred while returning data."
+            });
+        }
+
+        if(order == null) {
+            return res.status(404).send({
+                data: null,
+                success: false,
+                message: "Not found."
+            });
+        }
+
+        let supp = await Supplier.findOne({_id: order.supplier});
+
+        return res.status(200).send({
+            data: {
+                order: order,
+                supplier: supp
+            },
+            success: true,
+            message: "Successfully returned."
+        });
     })
 }

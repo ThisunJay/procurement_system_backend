@@ -19,15 +19,12 @@ const User = new mongoose.Schema({
         type: Number,
         default: 0
     },
-    site_location: {
-        type: String,
-    },
-    site_code: {
-        type: String,
-    },
     contact_number: {
         type: String,
       
+    },
+    designation: {
+        type: String,
     }
 });
 

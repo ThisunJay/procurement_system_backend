@@ -18,13 +18,6 @@ const Item = new mongoose.Schema({
         type: String,
         required: true,
     },
-    supplierName: {
-        type: Schema.Types.ObjectId,
-        // ref: 'suppliers',
-        required: true,
-    },
-   
-  
 });
 
 module.exports = mongoose.model('items', Item);
