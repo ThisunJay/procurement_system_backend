@@ -62,7 +62,14 @@ exports.create = async (req, res) => {
 
 exports.signin = async (req, res) => {
     console.log(req.body);
-    const user_details = await User.findOne({ email: req.body.email });
+   let options = {};
+    if(req.body.username != undefined){
+        options = { username : req.body.username}
+    }else{
+        options = { email : req.body.email}
+    }
+      
+    const user_details = await User.findOne(options);
     console.log(user_details);
     if (user_details === null) {
         return res.status(406).send({
