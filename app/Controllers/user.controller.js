@@ -171,14 +171,14 @@ exports.register = async (req, res) => {
     }
 
     let hashedPwd = await bcrypt.hash(password, 10);
-    
+    var data = req.body.data
     const new_user = new User({
-        username: req.body.username,
-        email: req.body.email,
+        username: data.username,
+        email: data.email,
         password: hashedPwd,
-        role: req.body.role,
-        contact_number: req.body.contact_number,
-        designation: req.body.designation
+        role: data.role,
+        contact_number: data.contact_number,
+        designation: data.designation
     });
     new_user.save().then(data => {
         
