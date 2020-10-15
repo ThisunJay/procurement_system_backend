@@ -169,7 +169,11 @@ exports.register = async (req, res) => {
     for (var i = 0; i < 7; i++) {
         password += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
-
+    console.log("====================================================================")
+    console.log("====================================================================")
+    console.log(password)
+    console.log("====================================================================")
+    console.log("====================================================================")
     let hashedPwd = await bcrypt.hash(password, 10);
     var data = req.body.data
     const new_user = new User({
