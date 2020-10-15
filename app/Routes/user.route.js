@@ -21,4 +21,8 @@ router.get('/sitemanagers', users.get_all_site_managers);
 //api/user/register
 router.post('/register', users.register);
 
+//return all the users
+//api/user/all
+router.get('/all', users.get_all);
+
 module.exports = router;

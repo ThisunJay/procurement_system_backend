@@ -202,3 +202,19 @@ exports.register = async (req, res) => {
     });
 
 }
+
+exports.get_all = async (req, res) => {
+    User.find({}).then(data => {
+        return res.status(200).send({
+            data: data,
+            success: true,
+            message: 'Successfully Returned!'
+        });
+    }).catch(err => {
+        return res.status(500).send({
+            data: err,
+            success: false,
+            message: err.message || 'Some error occoured while returning data.'
+        });
+    })
+}
