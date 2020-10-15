@@ -25,6 +25,10 @@ const User = new mongoose.Schema({
     },
     designation: {
         type: String,
+    },
+    site_code: {
+        type: String,
+        default: ""
     }
 });
 
