@@ -25,6 +25,7 @@ const SiteRoute = require('./app/Routes/site.route');
 const ItemRoute = require('./app/Routes/item.route');
 const orderRoute = require('./app/Routes/order.route');
 const deliveriesRoute = require('./app/Routes/deliveries.route');
+const statsRoute = require('./app/Routes/stats.route');
 
 //define routes
 app.use('/api/users', userRoute);
@@ -33,6 +34,7 @@ app.use('/api/sites', SiteRoute);
 app.use('/api/items', ItemRoute);
 app.use('/api/orders', orderRoute);
 app.use('/api/deliveries', deliveriesRoute);
+app.use('/api/stats', statsRoute);
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => console.log(`Server up and running on port ${PORT}`));
