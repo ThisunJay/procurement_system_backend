@@ -221,7 +221,8 @@ exports.get_all = async (req, res) => {
 }
 
 exports.get_one = async (req, res) => {
-    const id = req.body.id;
+    //const id = req.body.id;
+    const id = req.params.id;
 
     Order.findOne({_id: id}, async (err, order) => {
         if(err) {

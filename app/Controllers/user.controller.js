@@ -79,6 +79,7 @@ exports.signin = async (req, res) => {
         });
     } else {
         const isEqual = await bcrypt.compare(req.body.password, user_details.password)
+        console.log(isEqual)
         if (!isEqual) {
             return res.status(406).send({
                 data: null,
@@ -186,10 +187,16 @@ exports.register = async (req, res) => {
     });
     new_user.save().then(data => {
         
-        UtilObj.sendPasswordForNewUser(data.email, password).then(data => {
-            console.log("email sent")
+        // UtilObj.sendPasswordForNewUser(data.email, password).then(data => {
+        //     console.log("email sent")
+        // }).catch(err => {
+        //     console.log(err);
+        // })
+
+        UtilObj.sendPasswordForSupplier(req.body.data.email, password).then(data => {
+            console.log("sent")
         }).catch(err => {
-            console.log(err);
+            console.log("failed")
         })
 
         return res.status(200).send({

@@ -22,6 +22,6 @@ router.get('/get_all', orders.get_all);
 
 //get one orders
 //api/orders/get_one
-router.get('/get_one', orders.get_one);
+router.get('/get_one/:id', orders.get_one);
 
 module.exports = router;
