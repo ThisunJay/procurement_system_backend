@@ -122,3 +122,38 @@ exports.sup_by_month = async (req, res) => {
         message: "Successfully returned."
     });
 }
+
+exports.recent_orders = async (req, res) => {
+
+    var today = new Date(moment( new Date() ).format("YYYY-MM-DD") ); 
+    var prev =  new Date(today - 12096e5 );
+    let dataset = []
+
+    Order.aggregate([
+        {
+            $project: {
+                  count : { $sum : 1 },
+                  current_date : { $dateToString: { format: "%Y-%m-%d", date: "$created_on" } }
+            }
+        },
+        {
+            $group : { _id : "$current_date"  , total  : { $sum :  '$count'}  }
+        }
+    ]).exec(function(err, result) {
+        if (err) { return next(err)}
+        console.log(result);
+        const data = result.map(i => {
+            return {
+                date: i._id,
+                numberoforders: i.total
+            }
+        })
+
+        return res.status(200).send({
+            data: data,
+            success: true,
+            message: "Successfully returned."
+        });
+    });
+
+}
