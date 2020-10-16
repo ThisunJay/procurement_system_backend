@@ -13,5 +13,8 @@ router.get('/bymonth', stats.by_month);
 //api/stats/supbymonth
 router.get('/supbymonth', stats.sup_by_month);
 
+//api/stats/recent
+router.get('/recent', stats.recent_orders);
+
 module.exports = router;
 
