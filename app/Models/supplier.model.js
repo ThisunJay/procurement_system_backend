@@ -19,6 +19,10 @@ const SupplierSchema = new Schema({
     type: String,
     required: true,
   },
+  created_on: {
+      type: Date,
+      default: Date.now
+  }
 });
 
 module.exports = mongoose.model('suppliers', SupplierSchema);

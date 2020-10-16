@@ -32,6 +32,10 @@ const Order = new mongoose.Schema({
     current_state: {
         type: String,
         default: 1
+    },
+    created_on: {
+        type: Date,
+        default: Date.now
     }
 });
 
