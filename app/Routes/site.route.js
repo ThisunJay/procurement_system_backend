@@ -13,6 +13,10 @@ router.get('/get_all', sites.get_all);
 //api/sites/get_one
 router.get('/get_one', sites.get_one);
 
+//get one site
+//api/sites/getone/:id
+router.get('/getone/:id', sites.get_one_id);
+
 //update site
 //api/sites/update
 router.patch('/update', sites.update);
