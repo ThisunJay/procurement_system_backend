@@ -253,3 +253,41 @@ exports.get_one = async (req, res) => {
         });
     })
 }
+
+exports.get_by_supplier = async (req, res) => {
+    const id = req.params.id;
+    Order.find({supplier: id}, (err, data) => {
+        if(err) {
+            return res.status(500).send({
+                data: null,
+                success: false,
+                message: err.message || "Some error occurred while returning data."
+            });
+        }
+
+        return res.status(200).send({
+            data: data,
+            success: true,
+            message: 'Successfully Returned!'
+        });
+    })
+}
+
+exports.get_by_site = async (req, res) => {
+    const id = req.params.id;
+    Order.find({site: id}, (err, data) => {
+        if(err) {
+            return res.status(500).send({
+                data: null,
+                success: false,
+                message: err.message || "Some error occurred while returning data."
+            });
+        }
+
+        return res.status(200).send({
+            data: data,
+            success: true,
+            message: 'Successfully Returned!'
+        });
+    })
+}

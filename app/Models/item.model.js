@@ -18,6 +18,9 @@ const Item = new mongoose.Schema({
         type: String,
         required: true,
     },
+    supplier: {
+        type: String,
+    }
 });
 
 module.exports = mongoose.model('items', Item);

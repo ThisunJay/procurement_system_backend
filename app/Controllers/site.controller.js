@@ -155,3 +155,29 @@ exports.update = async (req, res) => {
         })
     })
 }
+
+exports.get_one_id = async (req, res) => {
+    const id = req.params.id;
+
+    Site.findOne({ _id: id }).then(data => {
+        if (data == null) {
+            return res.status(404).send({
+                data: null,
+                success: false,
+                message: 'Not found!'
+            });
+        }
+
+        return res.status(200).send({
+            data: data,
+            success: true,
+            message: 'Successfully Returned!'
+        });
+    }).catch(err => {
+        return res.status(500).send({
+            data: null,
+            success: false,
+            message: err.message || "Some error occurred while returning data."
+        });
+    })
+}

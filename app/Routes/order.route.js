@@ -24,4 +24,12 @@ router.get('/get_all', orders.get_all);
 //api/orders/get_one
 router.get('/get_one/:id', orders.get_one);
 
+//get orders by supplier id
+//api/orders/getbysupp
+router.get('/getbysupp/:id', orders.get_by_supplier);
+
+//get orders by supplier id
+//api/orders/getbysupp
+router.get('/getbysite/:id', orders.get_by_site);
+
 module.exports = router;
