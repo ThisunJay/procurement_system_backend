@@ -1,7 +1,10 @@
 const Item = require('../Models/item.model');
 // add item
 exports.create = async (req, res) => {
-    const { item_id, item_name, description, price, supplierName } = req.body;
+
+  //  const { item_id, item_name, description, price, supplierName } = req.body;
+    const {item_id, item_name, description, price, supplier} = req.body;
+
 
     const newItem = new Item({
         item_id,
