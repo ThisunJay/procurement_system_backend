@@ -6,7 +6,7 @@ const User = require('../Models/user.model');
 
 const moment = require('moment');
 moment().format();
-
+// get counts 
 exports.counts = async (req, res) => {
     const itemCount = await Item.find().count();
     const siteCount = await Site.find().count();
@@ -14,7 +14,7 @@ exports.counts = async (req, res) => {
     const userCount = await User.find().count();
     const pendingOrders = await Order.find();
     const allPendingOrders = pendingOrders.filter(data => {
-        if(data.current_state == "1" || data.current_state == "2" || data.current_state == "3" || data.current_state == "4"){
+        if (data.current_state == "1" || data.current_state == "2" || data.current_state == "3" || data.current_state == "4") {
             return data;
         }
     }).length;
@@ -22,7 +22,7 @@ exports.counts = async (req, res) => {
     console.log(allPendingOrders);
 
     const allCompletedOrders = pendingOrders.filter(data => {
-        if(data.current_state == "0" || data.current_state == "5"){
+        if (data.current_state == "0" || data.current_state == "5") {
             return data;
         }
     }).length;
@@ -44,7 +44,7 @@ exports.counts = async (req, res) => {
         message: "Successfully returned."
     });
 }
-
+// get latest orders
 exports.latest_orders = async (req, res) => {
     const allOrders = await Order.find();
     let data = allOrders.filter(data => {
@@ -58,11 +58,9 @@ exports.latest_orders = async (req, res) => {
 
         console.log(dif);
 
-        if(dif < 14) return data;
+        if (dif < 14) return data;
     });
-
     //data = data.reverse();
-
     return res.status(200).send({
         data: data,
         success: true,
@@ -73,10 +71,12 @@ exports.latest_orders = async (req, res) => {
 
 exports.by_month = async (req, res) => {
     const num = await Order.aggregate([
-        {$group: {
-            _id: {$substr: ['$created_on', 5, 2]},
-            numberoforders: {$sum: 1}
-        }}
+        {
+            $group: {
+                _id: { $substr: ['$created_on', 5, 2] },
+                numberoforders: { $sum: 1 }
+            }
+        }
     ])
 
     console.log(num);
@@ -96,26 +96,24 @@ exports.by_month = async (req, res) => {
         message: "Successfully returned."
     });
 }
-
+// get supplier by month
 exports.sup_by_month = async (req, res) => {
     const num = await Supplier.aggregate([
-        {$group: {
-            _id: {$substr: ['$created_on', 5, 2]},
-            numberofsuppliers: {$sum: 1}
-        }}
+        {
+            $group: {
+                _id: { $substr: ['$created_on', 5, 2] },
+                numberofsuppliers: { $sum: 1 }
+            }
+        }
     ])
-
     console.log(num);
-
     let month = num.map(i => {
         return {
             month: i._id,
             numberofsuppliers: i.numberofsuppliers
         }
     })
-
     console.log(month);
-
     return res.status(200).send({
         data: month,
         success: true,
@@ -123,28 +121,27 @@ exports.sup_by_month = async (req, res) => {
     });
 }
 
+// get recent orders
 exports.recent_orders = async (req, res) => {
-
-    var today = new Date(moment( new Date() ).format("YYYY-MM-DD") ); 
-    var prev =  new Date(today - 12096e5 );
+    var today = new Date(moment(new Date()).format("YYYY-MM-DD"));
+    var prev = new Date(today - 12096e5);
     let dataset = []
-
     Order.aggregate([
         {
             $project: {
-                  count : { $sum : 1 },
-                  current_date : { $dateToString: { format: "%Y-%m-%d", date: "$created_on" } } 
+                count: { $sum: 1 },
+                current_date: { $dateToString: { format: "%Y-%m-%d", date: "$created_on" } }
             }
         },
         {
-            $group : { _id : "$current_date"  , total  : { $sum :  '$count'}  }
+            $group: { _id: "$current_date", total: { $sum: '$count' } }
         },
         {
             $sort: { current_state: -1 }
         }
-    ]).exec(function(err, result) {
-        if (err) { return next(err)}
-        
+    ]).exec(function (err, result) {
+        if (err) { return next(err) }
+
         let data = result.map(i => {
             return {
                 date: i._id,
@@ -152,11 +149,8 @@ exports.recent_orders = async (req, res) => {
             }
         })
         //console.log(data);
-
         data.sort((a, b) => (a.date > b.date) ? 1 : ((b.date > a.date) ? -1 : 0));
-
         //console.log(data);
-
         return res.status(200).send({
             data: data,
             success: true,

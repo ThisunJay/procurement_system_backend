@@ -1,6 +1,7 @@
 const Site = require('../Models/sites.model');
 const User = require('../Models/user.model');
 
+// create site
 exports.create = async (req, res) => {
     const { site_manager, address, site_code } = req.body.data;
 
@@ -31,15 +32,8 @@ exports.create = async (req, res) => {
     })
 }
 
+// get all sites
 exports.get_all = async (req, res) => {
-
-
-
-
-
-
-
-
     Site.aggregate([
         {
             $lookup: {
@@ -52,50 +46,21 @@ exports.get_all = async (req, res) => {
         {
             $project: {
                 site_manager: { $arrayElemAt: ["$site_manager", 0], },
-                address : 1,
-                site_code : 1,
+                address: 1,
+                site_code: 1,
             }
         }
     ]).exec(function (err, result) {
         if (err) { return next(err) }
 
         res.status(200).send({
-            data : result
+            data: result
         })
 
     });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // Site.find({}).then(data => {
-    //     return res.status(200).send({
-    //         data: data,
-    //         success: true,
-    //         message: 'Successfully Returned!'
-    //     });
-    // }).catch(err => {
-    //     return res.status(500).send({
-    //         data: null,
-    //         success: false,
-    //         message: err.message || "Some error occurred while returning data."
-    //     });
-    // })
 }
 
+// get specific site
 exports.get_one = async (req, res) => {
     const { id } = req.body;
 
@@ -121,7 +86,7 @@ exports.get_one = async (req, res) => {
         });
     })
 }
-
+// update site
 exports.update = async (req, res) => {
     const { site_manager, address, phoneNo, id } = req.body;
 
@@ -156,6 +121,7 @@ exports.update = async (req, res) => {
     })
 }
 
+// get one site
 exports.get_one_id = async (req, res) => {
     const id = req.params.id;
 

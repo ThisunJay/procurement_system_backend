@@ -1,26 +1,34 @@
 const sites = require("../Controllers/site.controller");
 const router = require("express").Router();
 
-//create site
-//api/sites/create
+/*
+*  POST
+*  create site
+*  @route_name :api/sites/create
+*/
 router.post('/create', sites.create);
-
-//get all sites
-//api/sites/get_all
+/*
+*  GET
+*  get all sites
+*  @route_name :api/sites/get_all
+*/
 router.get('/get_all', sites.get_all);
-
-//get one site
-//api/sites/get_one
+/*
+*  GET
+*  get one site
+*  @route_name :api/sites/get_one
+*/
 router.get('/get_one', sites.get_one);
-
-//get one site
-//api/sites/getone/:id
+/*
+*  GET
+*  get one site by id
+*  @route_name :api/sites/getone/:id
+*/
 router.get('/getone/:id', sites.get_one_id);
-
-//update site
-//api/sites/update
+/*
+*  PATCH
+*  update site
+*  @route_name :api/sites/update
+*/
 router.patch('/update', sites.update);
-
-//need to create the delete route
-
 module.exports = router;
