@@ -2,17 +2,11 @@ const Supplier = require('../Models/supplier.model');
 const User = require('../Models/user.model');
 const bcrypt = require('bcrypt');
 const userRoles = require('../Util/userRoles.json');
-
 const UtilObj = require('../Util/util');
 
+// create supplier
 exports.create = async (req, res) => {
     const { name, address, phoneNo, email } = req.body;
- 
-    // console.log(userRoles.site_manager);
-    // console.log(userRoles.accountant);
-    // console.log(userRoles.management);
-    // console.log(userRoles.supplier);
-
     let supplier = new Supplier({
       name: name,
       address: address,
@@ -38,7 +32,6 @@ exports.create = async (req, res) => {
             password: hashedPwd,
             role: userRoles.supplier
         })
-
         newUser.save().then(user => {
             UtilObj.sendPasswordForSupplier(user.email, password).then(data => {
                 console.log("email sent")
@@ -85,7 +78,7 @@ exports.get = async (req, res) => {
         });
     })
 }
-
+// get specific supplier
 exports.get_one = async (req, res) => {
     const id = req.params.id;
     Supplier.find({_id: id}, (err, data) => {

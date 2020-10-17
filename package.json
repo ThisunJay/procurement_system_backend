@@ -4,7 +4,16 @@
   "description": "backend for case study project",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  
+    "test": "jest"
+    
+
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
   },
   "author": "Jayamadhu Thisun",
   "license": "MIT",
@@ -19,5 +28,10 @@
     "morgan": "^1.10.0",
     "nodemailer": "^6.4.13",
     "nodemon": "^2.0.4"
+  },
+  "devDependencies": {
+    "jest": "^26.5.3",
+    "supertest": "^5.0.0"
   }
+
 }

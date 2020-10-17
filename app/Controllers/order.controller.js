@@ -1,6 +1,6 @@
 const Order = require('../Models/orders.model');
 const Supplier = require('../Models/supplier.model');
-
+// create order
 exports.create = async (req, res) => {
     const {items, supplier, employee, date, site, state, current_state} = req.body;
 
@@ -53,7 +53,7 @@ exports.create = async (req, res) => {
     })
 
 }
-
+// delete order
 exports.delete = async (req, res) => {
     const {id} = req.body;
 
@@ -89,7 +89,7 @@ exports.delete = async (req, res) => {
         })
     })
 }
-
+// update order
 exports.update_state = async (req, res) => {
     const {state, id} = req.body;
 
@@ -162,7 +162,7 @@ exports.update_state = async (req, res) => {
     })
 
 }
-
+// update order
 exports.update_order = async (req, res) => {
     const {items, id, total} = req.body;
 
@@ -201,7 +201,7 @@ exports.update_order = async (req, res) => {
         })
     })
 }
-
+// get all orders
 exports.get_all = async (req, res) => {
     Order.find({}, (err, data) => {
         if(err) {
@@ -219,7 +219,7 @@ exports.get_all = async (req, res) => {
         });
     })
 }
-
+// get specific order
 exports.get_one = async (req, res) => {
     //const id = req.body.id;
     const id = req.params.id;
@@ -253,7 +253,7 @@ exports.get_one = async (req, res) => {
         });
     })
 }
-
+// get orders by specific supllier
 exports.get_by_supplier = async (req, res) => {
     const id = req.params.id;
     Order.find({supplier: id}, (err, data) => {
@@ -272,7 +272,7 @@ exports.get_by_supplier = async (req, res) => {
         });
     })
 }
-
+// get orders by site
 exports.get_by_site = async (req, res) => {
     const id = req.params.id;
     Order.find({site: id}, (err, data) => {

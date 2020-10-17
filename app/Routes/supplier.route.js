@@ -1,14 +1,23 @@
 const suppliers = require("../Controllers/supplier.controller");
 const router = require("express").Router();
 
-//add a new supplier
+/*
+*  POST
+*  add a new supplie
+*  @route_name :api/supplier/add
+*/
 router.post('/add', suppliers.create);
-
-//get all suppliers
-router.get('/get', suppliers.get )
-
-//get one supplier
-//api/supplier/getone/:id
+/*
+*  GET
+*  get all suppliers
+*  @route_name :api/supplier/get
+*/
+router.get('/get', suppliers.get)
+/*
+*  GET
+*  get one supplier
+*  @route_name :api/supplier/getone/:id
+*/
 router.get('/getone/:id', suppliers.get_one);
 
 module.exports = router;

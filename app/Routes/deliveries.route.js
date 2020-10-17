@@ -1,20 +1,30 @@
 const deliveries = require('../Controllers/deliveries.controller');
 const router = require('express').Router();
 
-//create new deliveries
-//api/deliveries/create
+
+/*
+*  POST
+*  create new deliveries
+*  @route_name : api/deliveries/create
+*/
 router.post('/create', deliveries.create);
-
-//delete a delivery
-//api/deliveries/delete
+/*
+*  DELETE
+*  delete a delivery
+*  @route_name : api/deliveries/delete
+*/
 router.delete('/delete', deliveries.delete);
-
-//update approval
-//api/deliveries/approve
+/*
+*  PATCH
+*  update approval
+*  @route_name : api/deliveries/approve
+*/
 router.patch('/approve', deliveries.approve);
-
-//update state
-//api/deliveries/state
+/*
+*  PATCH
+*  update state
+*  @route_name : api/deliveries/state
+*/
 router.patch('/state', deliveries.update_state);
 
 module.exports = router;
