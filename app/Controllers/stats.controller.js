@@ -133,21 +133,29 @@ exports.recent_orders = async (req, res) => {
         {
             $project: {
                   count : { $sum : 1 },
-                  current_date : { $dateToString: { format: "%Y-%m-%d", date: "$created_on" } }
+                  current_date : { $dateToString: { format: "%Y-%m-%d", date: "$created_on" } } 
             }
         },
         {
             $group : { _id : "$current_date"  , total  : { $sum :  '$count'}  }
+        },
+        {
+            $sort: { current_state: -1 }
         }
     ]).exec(function(err, result) {
         if (err) { return next(err)}
-        console.log(result);
-        const data = result.map(i => {
+        
+        let data = result.map(i => {
             return {
                 date: i._id,
                 numberoforders: i.total
             }
         })
+        //console.log(data);
+
+        data.sort((a, b) => (a.date > b.date) ? 1 : ((b.date > a.date) ? -1 : 0));
+
+        //console.log(data);
 
         return res.status(200).send({
             data: data,
