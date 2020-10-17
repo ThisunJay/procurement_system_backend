@@ -37,4 +37,5 @@ app.use('/api/deliveries', deliveriesRoute);
 app.use('/api/stats', statsRoute);
 
 const PORT = process.env.PORT || 4000;
-app.listen(PORT, () => console.log(`Server up and running on port ${PORT}`));
+var server = app.listen(PORT, () => console.log(`Server up and running on port ${PORT}`));
+module.exports = server
