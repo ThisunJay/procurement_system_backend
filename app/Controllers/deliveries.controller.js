@@ -4,30 +4,6 @@ const Deliveries = require('../Models/deliveries.model');
 exports.create = async (req, res) => {
     const{items, supplier, order, date, state, approved, notes} = req.body;
 
-    //make sure to send items like this
-    // [
-    //     {
-    //         item: {itemObject},
-    //         quantity: quantity
-    //     },
-    //     {
-    //         item: {itemObject},
-    //         quantity: quantity
-    //     }
-    // ]
-
-    //make sure to send state like this
-    // [
-    //     {
-    //         state: state,
-    //         comment: comment
-    //     },
-    //     {
-    //         state: state,
-    //         comment: comment
-    //     }
-    // ]
-
     const newDeliveries = new Deliveries({
         items, 
         supplier, 
