@@ -4,6 +4,7 @@ const cors = require('cors');
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const app = express();
+const path = require('path');
 
 //Establish database connection
 connectDB();
@@ -16,7 +17,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(morgan("dev"));
 
 //default response
-app.get('/', (req, res) => res.send('Case study API up and running!'));
+app.use(express.static(path.join(__dirname, "build")));
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "build", "index.html"))
+    // res.json(path.join(__dirname, "build", "index.html"))
+  });
 
 //import routes
 const userRoute = require('./app/Routes/user.route');

@@ -4,10 +4,7 @@
   "description": "backend for case study project",
   "main": "server.js",
   "scripts": {
-  
     "test": "jest"
-    
-
   },
   "jest": {
     "testEnvironment": "node",
@@ -33,5 +30,4 @@
     "jest": "^26.5.3",
     "supertest": "^5.0.0"
   }
-
 }
