@@ -1,31 +1,8 @@
 const Deliveries = require('../Models/deliveries.model');
 
+// create deliveries
 exports.create = async (req, res) => {
     const{items, supplier, order, date, state, approved, notes} = req.body;
-
-    //make sure to send items like this
-    // [
-    //     {
-    //         item: {itemObject},
-    //         quantity: quantity
-    //     },
-    //     {
-    //         item: {itemObject},
-    //         quantity: quantity
-    //     }
-    // ]
-
-    //make sure to send state like this
-    // [
-    //     {
-    //         state: state,
-    //         comment: comment
-    //     },
-    //     {
-    //         state: state,
-    //         comment: comment
-    //     }
-    // ]
 
     const newDeliveries = new Deliveries({
         items, 
@@ -51,7 +28,7 @@ exports.create = async (req, res) => {
         });
     })
 }
-
+// delete deliveries
 exports.delete = async (req, res) => {
     const {id} = req.body;
 
@@ -87,7 +64,7 @@ exports.delete = async (req, res) => {
         })
     })
 }
-
+// approve delivery
 exports.approve = async (req, res) => {
     const{id, approved} = req.body;
 
@@ -125,7 +102,7 @@ exports.approve = async (req, res) => {
         })
     })
 }
-
+// update delivery state
 exports.update_state = async (req, res) => {
     const{id, state} = req.body;
 
@@ -163,7 +140,7 @@ exports.update_state = async (req, res) => {
         })
     })
 }
-
+// update items in the delivey
 exports.update_items = async (req, res) => {
     const{id, items} = req.body;
 
